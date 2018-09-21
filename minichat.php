@@ -21,44 +21,96 @@ while ($donnees_s = $reponse_s->fetch())
     <head>
         <meta charset="utf-8" />
         <title>Mini-chat</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
     <style>
-    form
-    {
-        text-align:center;
-    }
+        form
+        {
+            display:block;
+            margin-left: 150px;
+            
+        }
+        img
+        {
+            display:block;
+            margin-top: 50px;
+            margin-left: 0px;
+            width:100%;
+        }
+        body
+        {
+            background-color: #191919;
+        }
+        label
+        {
+            color: #E41F16;
+        }
+        p
+        {
+            color: white;
+        }
+        strong
+        {
+            color : #E41F16;
+        }
+        section
+        {
+            display:block;
+            margin-top: 50px; 
+        }
+
     </style>
     <body>
-    
-    <form action="minichat_post.php" method="post">
-        <p>
-        <label for="pseudo">Pseudo</label> : <input type="text" name="pseudo" value="<?php echo $_SESSION['pseudo'] ?>" id="pseudo" /><br />
-        <label for="message">Message</label> :  <input type="text" name="message" id="message" /><br />
+            <div class="container">
+                <div class="row">
 
-        <input type="submit" value="Envoyer" />
-    </p>
-    </form>
+                    <div class="col-lg-6"><img src="logo_teamRocket.jpg" alt="Logo team Rocket"/></div>  
+                
 
-<?php
-try
-{
-$bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-        die('Erreur : '.$e->getMessage());
-}
-// Récupération des 10 derniers messages
-$reponse = $bdd->query('SELECT pseudo, message, DATE_FORMAT(date_ajout,\'%d/%m/%Y %H:%i:%s\') AS date_fr FROM minichat ORDER BY ID DESC LIMIT 0, 10');
 
-// Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
-while ($donnees = $reponse->fetch())
-{
-    echo '<p> [' . $donnees['date_fr'] . '] <strong>' . htmlspecialchars($donnees['pseudo']) . '</strong> : ' . htmlspecialchars($donnees['message']) . '</p>';
-}
+                    <div class="col-lg-6 col-lg-offset-6">
+                        <section>
+                            <?php
+                            try
+                            {
+                            $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+                            }
+                            catch(Exception $e)
+                            {
+                                    die('Erreur : '.$e->getMessage());
+                            }
+                            // Récupération des 10 derniers messages
+                            $reponse = $bdd->query('SELECT pseudo, message, DATE_FORMAT(date_ajout,\'%d/%m/%Y %H:%i:%s\') AS date_fr FROM minichat ORDER BY ID DESC LIMIT 0, 10');
 
-$reponse->closeCursor();
+                            // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+                            while ($donnees = $reponse->fetch())
+                            {
+                                echo '<p> [' . $donnees['date_fr'] . '] <strong>' . htmlspecialchars($donnees['pseudo']) . '</strong> : ' . htmlspecialchars($donnees['message']) . '</p>';
+                            }
 
-?>
+                            $reponse->closeCursor();
+
+                            ?>
+                        </section>
+                    </div>
+                </div>
+           
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form action="minichat_post.php" method="post">
+                            <p>
+                                <label for="pseudo">Pseudo : </label> <input type="text" name="pseudo" value="<?php echo $_SESSION['pseudo'] ?>" id="pseudo" /><br />
+                                <label for="message">Message : </label> <input type="text" name="message" id="message" /><br /><br />
+
+                                <input type="submit" value="Envoyer" class="btn btn-outline-danger" />
+                            </p>
+                        </form>
+                    </div>
+                </div>
+             
+               
+            </div>
     </body>
 </html>
