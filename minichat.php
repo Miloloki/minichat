@@ -29,7 +29,8 @@ while ($donnees_s = $reponse_s->fetch())
         form
         {
             display:block;
-            margin-left: 150px;
+            margin-right: auto;
+            margin-left: auto;
             
         }
         img
@@ -45,7 +46,9 @@ while ($donnees_s = $reponse_s->fetch())
         }
         label
         {
+            display:block;
             color: #E41F16;
+            margin-left: 240px;
         }
         p
         {
@@ -60,6 +63,12 @@ while ($donnees_s = $reponse_s->fetch())
             display:block;
             margin-top: 50px; 
         }
+        input
+        {
+           display:block;
+           margin-left: 190px;
+           
+        }
 
     </style>
     <body>
@@ -70,8 +79,8 @@ while ($donnees_s = $reponse_s->fetch())
                         <img src="logo_teamRocket.jpg" alt="Logo team Rocket"/>
                             <form action="minichat_post.php" method="post">
                             <p>
-                                <label for="pseudo">Pseudo : </label> <input type="text" name="pseudo" value="<?php echo $_SESSION['pseudo'] ?>" id="pseudo" /><br />
-                                <label for="message">Message : </label> <input type="text" name="message" id="message" /><br /><br />
+                                <label for="pseudo">Pseudo : </label><br /> <input type="text" name="pseudo" value="<?php echo $_SESSION['pseudo'] ?>" id="pseudo" /><br />
+                                <label for="message">Message : </label><br /> <input type="text" name="message" id="message" /><br /><br />
 
                                 <input type="submit" value="Envoyer" class="btn btn-outline-danger" />
                             </p>
