@@ -66,7 +66,17 @@ while ($donnees_s = $reponse_s->fetch())
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-6"><img src="logo_teamRocket.jpg" alt="Logo team Rocket"/></div>  
+                    <div class="col-lg-6">
+                        <img src="logo_teamRocket.jpg" alt="Logo team Rocket"/>
+                            <form action="minichat_post.php" method="post">
+                            <p>
+                                <label for="pseudo">Pseudo : </label> <input type="text" name="pseudo" value="<?php echo $_SESSION['pseudo'] ?>" id="pseudo" /><br />
+                                <label for="message">Message : </label> <input type="text" name="message" id="message" /><br /><br />
+
+                                <input type="submit" value="Envoyer" class="btn btn-outline-danger" />
+                            </p>
+                        </form>
+                    </div>  
                 
 
 
@@ -95,21 +105,7 @@ while ($donnees_s = $reponse_s->fetch())
                             ?>
                         </section>
                     </div>
-                </div>
-           
-                <div class="row">
-                    <div class="col-lg-6">
-                        <form action="minichat_post.php" method="post">
-                            <p>
-                                <label for="pseudo">Pseudo : </label> <input type="text" name="pseudo" value="<?php echo $_SESSION['pseudo'] ?>" id="pseudo" /><br />
-                                <label for="message">Message : </label> <input type="text" name="message" id="message" /><br /><br />
-
-                                <input type="submit" value="Envoyer" class="btn btn-outline-danger" />
-                            </p>
-                        </form>
-                    </div>
-                </div>
-             
+                </div>   
                
             </div>
     </body>
